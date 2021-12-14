@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run lint && node .",
     "production": "node --no-warnings .",
-    "lint": "eslint .",
+    "lint": "eslint src",
     "ci": "npm install dotenv fluent-ffmpeg lame simple-youtube-api ytdl-core --save && npm install speaker --mpg123-backend=openal --save"
   },
   "repository": {
