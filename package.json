@@ -1,5 +1,5 @@
 {
-  "name": "musik",
+  "name": "nodemusic",
   "version": "1.0.0",
   "description": "",
   "main": "src/interface.js",
@@ -7,7 +7,7 @@
     "test": "npm run lint && node .",
     "production": "node --no-warnings .",
     "lint": "eslint .",
-    "ci": "npm ci && npm install speaker --mpg123-backend=openal"
+    "ci": "npm install dotenv fluent-ffmpeg lame simple-youtube-api ytdl-core --save && npm install speaker --mpg123-backend=openal --save"
   },
   "repository": {
     "type": "git",
