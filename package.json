@@ -1,0 +1,40 @@
+{
+  "name": "musik",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/interface.js",
+  "scripts": {
+    "test": "npm run lint && node .",
+    "production": "node --no-warnings .",
+    "lint": "eslint .",
+    "ci": "npm ci && npm install speaker --mpg123-backend=openal"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RangerEmerald/NodeMusic.git"
+  },
+  "author": "RangerEmerald",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RangerEmerald/NodeMusic/issues"
+  },
+  "homepage": "https://github.com/RangerEmerald/NodeMusic#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "lame": "^1.2.4",
+    "simple-youtube-api": "^5.2.1",
+    "speaker": "^0.5.3",
+    "ytdl-core": "^4.9.1"
+  },
+  "engines": {
+    "node": "11.10.0"
+  }
+}
