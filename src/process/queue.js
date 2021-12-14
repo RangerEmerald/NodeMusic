@@ -1,6 +1,5 @@
 const EventEmitter = require('events')
 const Audio = require('./audio')
-// const ytdl = require('ytdl-core')
 
 module.exports = class Queue extends EventEmitter {
   constructor (familyFriendly = true) {
