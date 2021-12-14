@@ -19,12 +19,11 @@ module.exports = async (queue) => {
     const command = d.toString().trim().split(' ')
     const arg = command.splice(1).join(' ')
 
-    try {
-      d = Number(d)
-    } catch {}
+    d = isNaN(d) ? d : Number(d)
 
-    if (typeof d === 'number' && songs.length > 0) {
-      queue.emit('add', songs[Number(d) - 1])
+    if (songs.length > 0) {
+      if (typeof d !== 'number' || d < 1 || d > 5) console.log('\x1b[31mExiting options. Input must be a number between 1 and 5.\x1b[0m')
+      else queue.emit('add', songs[Number(d) - 1])
       songs = []
     } else {
       switch (command[0]) {
@@ -40,7 +39,7 @@ module.exports = async (queue) => {
             const lsongs = (await youtubeApi(arg)).slice(0, 5)
             for (let pos = 0; pos < lsongs.length; ++pos) formatList((await ytdl.getBasicInfo(lsongs[pos].id.videoId)).videoDetails, pos + 1)
             console.log('----------------------')
-            console.log('\x1b[34mChoose a song number: \x1b[0m')
+            console.log('\x1b[34mChoose a song number. Type exit to exit:\x1b[0m')
           }
           break
         case 'quit':
