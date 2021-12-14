@@ -14,7 +14,7 @@ module.exports = class Audio extends EventEmitter {
       highWaterMark: 1
     }
 
-    if (typeof yt !== 'string' && typeof yt !== 'object') throw new Error('Yt must be either a string or object.')
+    if (typeof yt !== 'object') throw new Error('Yt must be an object.')
 
     super()
     try {
