@@ -1,12 +1,15 @@
 const youtubeApi = require('./youtubeApi')
+const ytdl = require('ytdl-core')
 
 let songs = []
 
 function formatList (song, pos) {
+  songs.push(song)
   console.log(`${pos}. -------------------`)
   console.log(`\x1b[32mTitle: ${song.title}\x1b[0m`)
-  console.log(`\x1b[32mArtist: ${song.channel.title}\x1b[0m`)
-  console.log(`\x1b[32mPublished: ${(new Date(song.publishedAt)).toLocaleDateString()}\x1b[0m`)
+  console.log(`\x1b[32mArtist: ${song.ownerChannelName}\x1b[0m`)
+  console.log(`\x1b[32mSong Length: ${song.isLiveContent ? '∞' : song.lengthSeconds < 3600 ? new Date(song.lengthSeconds * 1000).toISOString().substr(14, 5) : new Date(song.lengthSeconds * 1000).toISOString().substr(11, 8)}\x1b[0m`)
+  console.log(`\x1b[32mPublished: ${(new Date(song.uploadDate)).toLocaleDateString()}\x1b[0m`)
 }
 
 module.exports = async (queue) => {
@@ -31,11 +34,11 @@ module.exports = async (queue) => {
             try {
               queue.emit('add', await youtubeApi(arg.slice(arg.indexOf('?v=') + 3)))
             } catch {
-              console.log('\x1b[31m[31mError in adding song. Double check to make sure the link is valid.\x1b[0m')
+              console.log('\x1b[31mError in adding song. Double check to make sure the link is valid.\x1b[0m')
             }
           } else {
-            songs = await youtubeApi(arg)
-            for (let pos = 0; pos < songs.length; ++pos) formatList(songs[pos], pos + 1)
+            const lsongs = (await youtubeApi(arg)).slice(0, 5)
+            for (let pos = 0; pos < lsongs.length; ++pos) formatList((await ytdl.getBasicInfo(lsongs[pos].id.videoId)).videoDetails, pos + 1)
             console.log('----------------------')
             console.log('\x1b[34mChoose a song number: \x1b[0m')
           }

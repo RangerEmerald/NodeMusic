@@ -1,13 +1,16 @@
 const EventEmitter = require('events')
 const Audio = require('./audio')
+// const ytdl = require('ytdl-core')
 
 module.exports = class Queue extends EventEmitter {
-  constructor () {
+  constructor (familyFriendly = true) {
     super()
 
     this.queue = []
+    this.familyFriendly = familyFriendly
 
     this.on('add', async song => {
+      if (familyFriendly && !song.isFamilySafe) console.log('\x1b[31mCurrently in family friendly only mode. Please search and listen for famil friendly songs only.\x1b[0m')
       this.queue.push(new Audio(song))
       console.log(`\x1b[36mSong added: ${song.title}\x1b[0m`)
       this.emit('play')

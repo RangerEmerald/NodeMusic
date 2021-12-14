@@ -1,14 +1,12 @@
-require('dotenv').config()
-const YoutubeApi = require('simple-youtube-api')
-
-const Youtube = new YoutubeApi(process.env.API_TOKEN)
+const youtubeSearch = require('youtube-search-without-api-key')
+const ytdl = require('ytdl-core')
 
 module.exports = async (search = '') => {
   if (search === '') throw new Error('Search length less than or equal to zero.')
   try {
-    return await Youtube.getVideoByID(search)
+    return (await ytdl.getBasicInfo(search)).videoDetails
   } catch {
-    return await Youtube.search(search)
+    return await youtubeSearch.search(search)
       .catch(err => {
         throw new Error(err)
       })
