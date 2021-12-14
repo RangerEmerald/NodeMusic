@@ -8,9 +8,9 @@ const Speaker = require('speaker')
 module.exports = class Audio extends EventEmitter {
   constructor (yt) {
     Audio.opt = {
-      filter: 'audioonly',
-      quality: 'highestaudio',
-      audioFormat: 'mp3',
+      filter: 'audioonly', // Gets only audio to save bandwidth
+      quality: 'highestaudio', // Gets highest quality audio since not getting video
+      audioFormat: 'mp3', // Gets as mp3
       highWaterMark: 1
     }
 
@@ -18,8 +18,8 @@ module.exports = class Audio extends EventEmitter {
 
     super()
     try {
-      this.song = ytdl(yt.videoId, Audio.opt)
-      this.yt = yt
+      this.song = ytdl(yt.videoId, Audio.opt) // Gets video stream information
+      this.yt = yt // Saves youtube video information for later use
       this.ffmpeg = FFmpeg(this.song)
     } catch {
       console.log('\x1b[31mError in play track.\x1b[0m')
@@ -31,7 +31,7 @@ module.exports = class Audio extends EventEmitter {
   play () {
     try {
       process.nextTick(() => {
-        this.output = this.ffmpeg.format(Audio.opt.audioFormat).pipe(new PassThrough()).pipe(decoder()).pipe(new Speaker())
+        this.output = this.ffmpeg.format(Audio.opt.audioFormat).pipe(new PassThrough()).pipe(decoder()).pipe(new Speaker()) // Plays song to speaker
       })
     } catch {
       console.log('\x1b[31mError in play track.\x1b[0m')
