@@ -18,7 +18,7 @@ module.exports = class Audio extends EventEmitter {
 
     super()
     try {
-      this.song = ytdl(yt.id, Audio.opt)
+      this.song = ytdl(yt.videoId, Audio.opt)
       this.yt = yt
       this.ffmpeg = FFmpeg(this.song)
     } catch {

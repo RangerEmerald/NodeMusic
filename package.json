@@ -1,13 +1,13 @@
 {
   "name": "nodemusic",
   "version": "1.0.0",
-  "description": "",
+  "description": "Listen to youtube audio through command line",
   "main": "src/interface.js",
   "scripts": {
     "test": "npm run lint && node .",
     "production": "node --no-warnings .",
     "lint": "eslint src",
-    "ci": "npm install dotenv fluent-ffmpeg lame simple-youtube-api ytdl-core --save && npm install speaker --mpg123-backend=openal --save"
+    "ci": "npm install fluent-ffmpeg lame youtube-search-without-api-key ytdl-core --save && npm install speaker --mpg123-backend=openal --save"
   },
   "repository": {
     "type": "git",
@@ -27,11 +27,10 @@
     "eslint-plugin-promise": "^5.2.0"
   },
   "dependencies": {
-    "dotenv": "^10.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "lame": "^1.2.4",
-    "simple-youtube-api": "^5.2.1",
     "speaker": "^0.5.3",
+    "youtube-search-without-api-key": "^1.0.7",
     "ytdl-core": "^4.9.1"
   },
   "engines": {
